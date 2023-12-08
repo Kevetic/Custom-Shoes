@@ -1,0 +1,11 @@
+Model Information:
+* title:	Shoe
+* source:	https://sketchfab.com/3d-models/shoe-4a5b805b7cab409b9a0534faa9f4b07b
+* author:	ely3 (https://sketchfab.com/ely3)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Shoe" (https://sketchfab.com/3d-models/shoe-4a5b805b7cab409b9a0534faa9f4b07b) by ely3 (https://sketchfab.com/ely3) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
