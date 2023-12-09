@@ -27,7 +27,7 @@ useGLTF.preload("models/ModelFour/scene.gltf");
 
 export const ModelFour = () => {
   return (
-    <Canvas camera={{ position: [1, 1, 1], zoom: 9 }}>
+    <Canvas camera={{ position: [1, 1, 1], zoom: 7 }}>
       <Stage preset="rembrandt" intensity={1} environment="city">
         <Suspense fallback={null}>
           <ambientLight />
