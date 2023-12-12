@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 
-export default function ColorPicker({ currentShoe, setSelectedColor }) {
-  console.log("in color picker:", setSelectedColor);
-  const [currentOptions, setCurrentOptions] = useState([
-    "RED",
-    "BLUE",
-    "PURPLE",
-    "ORANGE",
-  ]);
+export default function ColorPicker({ currentShoe, onColorSelect }) {
+  const { colors } = currentShoe;
 
   const handleColorSelect = (color) => {
-    setSelectedColor(color);
+    console.log("here:", color);
+    onColorSelect(color); // Call the callback
   };
 
-  return currentOptions.map((colors) => {
+  return colors.map((color) => {
     return (
       <button
-        style={{ background: colors }}
+        style={{ background: color }}
         className="colorBtns"
-        onClick={() => handleColorSelect(colors)}
+        onClick={() => handleColorSelect(color)}
       />
     );
   });

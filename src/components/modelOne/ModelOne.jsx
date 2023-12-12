@@ -1,16 +1,16 @@
-import React, { useRef, Suspense, useState } from "react";
+import React, { useRef, Suspense, useState, useEffect } from "react";
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 function Model(props) {
-  console.log(props);
+  const { selectedColor } = props;
   const { nodes, materials } = useGLTF("models/ModelOne/scene.gltf");
   return (
     <group {...props} dispose={null}>
       <mesh
         geometry={nodes.shoe_shoe_0.geometry}
         material={materials.shoe}
-        material-color={props.selectedColor ? props.selectedColor : null}
+        material-color={selectedColor ? selectedColor : null}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={100}
       />
