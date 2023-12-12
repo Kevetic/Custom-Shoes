@@ -12,6 +12,7 @@ function Model(props) {
   const { nodes, materials, animations } = useGLTF(
     "models/ModelTwo/scene.gltf"
   );
+  const { selectedColor } = props;
   const { actions } = useAnimations(animations, group);
   return (
     <group ref={group} {...props} dispose={null}>
@@ -24,6 +25,7 @@ function Model(props) {
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
                   material={materials.Left_tex}
+                  material-color={selectedColor ? selectedColor.color : null}
                 />
               </group>
               <group name="Right_Shoe_1">
@@ -31,6 +33,7 @@ function Model(props) {
                   name="Object_6"
                   geometry={nodes.Object_6.geometry}
                   material={materials.Right_tex}
+                  material-color={selectedColor ? selectedColor.color : null}
                 />
               </group>
               <group name="laces_2">
@@ -38,6 +41,9 @@ function Model(props) {
                   name="Object_8"
                   geometry={nodes.Object_8.geometry}
                   material={materials.Laces_tex}
+                  material-color={
+                    selectedColor.laceOne ? selectedColor.laceOne : "#fff"
+                  }
                 />
               </group>
             </group>
@@ -50,14 +56,14 @@ function Model(props) {
 
 useGLTF.preload("models/ModelTwo/scene.gltf");
 
-export const ModelTwo = () => {
+export const ModelTwo = ({ selectedColor }) => {
   return (
     <Canvas camera={{ position: [2, 2, 2], fov: 10 }}>
       <Stage preset="rembrandt" intensity={1} environment="city">
         <Suspense fallback={null}>
           <ambientLight />
           <spotLight intensity={0.9} angle={0.1} penumbra={1} castShadow>
-            <Model />
+            <Model selectedColor={selectedColor} />
             <OrbitControls
               enableRotate={true}
               enableZoom={true}

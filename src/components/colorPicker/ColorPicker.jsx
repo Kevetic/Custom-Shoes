@@ -1,20 +1,25 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function ColorPicker({ currentShoe, onColorSelect }) {
+export default function ColorPicker({ currentShoe, setSelectedColor }) {
   const { colors } = currentShoe;
-
-  const handleColorSelect = (color) => {
-    console.log("here:", color);
-    onColorSelect(color); // Call the callback
-  };
 
   return colors.map((color) => {
     return (
-      <button
-        style={{ background: color }}
+      <motion.h1
+        whileHover={{
+          textDecoration: "underline",
+          textDecorationColor: color.color,
+          textDecorationStyle: "wavy",
+        }}
+        initial={{ opacity: 0, y: 700 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
         className="colorBtns"
-        onClick={() => handleColorSelect(color)}
-      />
+        onClick={() => setSelectedColor(color)}
+      >
+        {color.option}
+      </motion.h1>
     );
   });
 }

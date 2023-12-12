@@ -8,6 +8,7 @@ import {
 import { Canvas } from "@react-three/fiber";
 
 export function Model(props) {
+  const { selectedColor } = props;
   const { nodes, materials } = useGLTF("models/ModelThree/scene.gltf");
   return (
     <group {...props} dispose={null}>
@@ -22,14 +23,14 @@ export function Model(props) {
 
 useGLTF.preload("models/ModelThree/scene.gltf");
 
-export const ModelThree = () => {
+export const ModelThree = ({ selectedColor }) => {
   return (
     <Canvas camera={{ position: [10, 5, 10], zoom: 3 }}>
       <Stage preset="rembrandt" intensity={1} environment="city">
         <Suspense fallback={null}>
           <ambientLight />
           <spotLight intensity={0.9} angle={0.1} penumbra={1} castShadow>
-            <Model />
+            <Model selectedColor={selectedColor} />
             <OrbitControls
               enableRotate={true}
               enableZoom={true}

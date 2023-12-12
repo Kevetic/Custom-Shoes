@@ -10,7 +10,7 @@ function Model(props) {
       <mesh
         geometry={nodes.shoe_shoe_0.geometry}
         material={materials.shoe}
-        material-color={selectedColor ? selectedColor : null}
+        material-color={selectedColor ? selectedColor.color : null}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={100}
       />
