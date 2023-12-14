@@ -10,7 +10,7 @@ import { Canvas } from "@react-three/fiber";
 function Model(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(
-    "/models/ModelTwo/scene.gltf"
+    "models/ModelTwo/scene.gltf"
   );
   const { selectedColor, currentColor } = props;
   const { actions } = useAnimations(animations, group);
@@ -67,7 +67,7 @@ function Model(props) {
   );
 }
 
-useGLTF.preload("/models/ModelTwo/scene.gltf");
+useGLTF.preload("models/ModelTwo/scene.gltf");
 
 export const ModelTwo = ({ selectedColor }) => {
   const [currentColor, setCurrentColor] = useState({

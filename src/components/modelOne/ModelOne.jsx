@@ -3,7 +3,7 @@ import { OrbitControls, useGLTF, Stage } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 export const ModelOne = ({ selectedColor }) => {
-  const { nodes, materials } = useGLTF("/models/ModelOne/scene.gltf");
+  const { nodes, materials } = useGLTF("models/ModelOne/scene.gltf");
   const { color } = selectedColor;
 
   const [currentColor, setCurrentColor] = useState("#fff");
@@ -51,4 +51,4 @@ export const ModelOne = ({ selectedColor }) => {
   );
 };
 
-useGLTF.preload("/models/ModelOne/scene.gltf");
+useGLTF.preload("models/ModelOne/scene.gltf");

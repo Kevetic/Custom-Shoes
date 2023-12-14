@@ -5,9 +5,7 @@ import { Canvas } from "@react-three/fiber";
 function Model(props) {
   let animate = props.animate.animate;
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF(
-    "/models/ShoeBox/scene.gltf"
-  );
+  const { nodes, materials, animations } = useGLTF("models/ShoeBox/scene.gltf");
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -58,7 +56,7 @@ function Model(props) {
   );
 }
 
-useGLTF.preload("/models/ShoeBox/scene.gltf");
+useGLTF.preload("models/ShoeBox/scene.gltf");
 
 export const ShoeBox = (animate) => {
   return (

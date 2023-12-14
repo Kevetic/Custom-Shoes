@@ -3,7 +3,7 @@ import { OrbitControls, useGLTF, Stage } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF("/models/ModelFour/scene.gltf");
+  const { nodes, materials } = useGLTF("models/ModelFour/scene.gltf");
   return (
     <group {...props} dispose={null}>
       <group position={[0, -0.147, -0.007]} rotation={[Math.PI / 2, 0, 0]}>
@@ -18,7 +18,7 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("/models/ModelFour/scene.gltf");
+useGLTF.preload("models/ModelFour/scene.gltf");
 
 export const ModelFour = () => {
   return (
