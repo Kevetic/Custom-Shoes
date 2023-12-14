@@ -1,15 +1,10 @@
-import React, { useRef, Suspense, useState } from "react";
-import {
-  OrbitControls,
-  useGLTF,
-  useAnimations,
-  Stage,
-} from "@react-three/drei";
+import React, { Suspense } from "react";
+import { OrbitControls, useGLTF, Stage } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 export function Model(props) {
   const { selectedColor } = props;
-  const { nodes, materials } = useGLTF("models/ModelThree/scene.gltf");
+  const { nodes, materials } = useGLTF("/models/ModelThree/scene.gltf");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -21,7 +16,7 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("models/ModelThree/scene.gltf");
+useGLTF.preload("/models/ModelThree/scene.gltf");
 
 export const ModelThree = ({ selectedColor }) => {
   return (

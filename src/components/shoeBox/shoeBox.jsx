@@ -1,16 +1,13 @@
-import React, { useRef, Suspense, useState, useEffect } from "react";
-import {
-  OrbitControls,
-  useGLTF,
-  useAnimations,
-  Stage,
-} from "@react-three/drei";
-import { Canvas, act } from "@react-three/fiber";
+import React, { useRef, Suspense, useEffect } from "react";
+import { useGLTF, useAnimations, Stage } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 function Model(props) {
   let animate = props.animate.animate;
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("models/ShoeBox/scene.gltf");
+  const { nodes, materials, animations } = useGLTF(
+    "/models/ShoeBox/scene.gltf"
+  );
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -61,9 +58,9 @@ function Model(props) {
   );
 }
 
-useGLTF.preload("models/ShoeBox/scene.gltf");
+useGLTF.preload("/models/ShoeBox/scene.gltf");
 
-export const ShoeBox = (animate, setLandingPage) => {
+export const ShoeBox = (animate) => {
   return (
     <Canvas camera={{ position: [9, 3, 10], zoom: 20 }}>
       <Stage preset="rembrandt" intensity={0} environment="city">

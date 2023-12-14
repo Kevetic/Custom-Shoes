@@ -1,16 +1,11 @@
-import { Canvas } from "@react-three/fiber";
 import "./App.css";
-import React, { useRef, Suspense, useState, useEffect } from "react";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import React, { useState, useEffect } from "react";
 import { ModelOne } from "./components/modelOne/ModelOne";
 import { ModelTwo } from "./components/modelTwo/ModelTwo";
 import { ModelThree } from "./components/modelThree/ModelThree";
 import { ModelFour } from "./components/modelFour/ModelFour";
 import Landing from "./views/Landing/Landing";
-import ColorPicker from "./components/colorPicker/ColorPicker";
 import { motion, AnimatePresence } from "framer-motion";
-import CloseIcon from "@mui/icons-material/Close";
-import { red } from "@mui/material/colors";
 import CusomizationView from "./views/CusomizationView";
 
 function App() {
