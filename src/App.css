@@ -1,8 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
   width: 100vw;
   height: 100vh;
@@ -11,11 +6,6 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   caret-color: transparent;
-}
-
-canvas {
-  height: 500px;
-  width: 500px;
 }
 
 .shoebox-container {
@@ -49,36 +39,97 @@ canvas {
 }
 
 .small {
-  height: 500px;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .previewBtn {
-  height: 50%;
-  width: 10%;
+  width: 25%;
   margin-top: 10px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.picker-container {
-  margin-top: 100px;
-  font-size: 18px;
-  position: absolute;
-  padding: 10px;
-  justify-content: space-evenly;
-  display: flex;
-  flex-direction: row;
-  height: 15%;
-}
-
 .colorBtns {
   cursor: pointer;
   display: flex;
+  flex-direction: row;
   margin: 50px;
   height: 50px;
   justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.customization-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+}
+
+.customization-header {
+  width: 100%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  text-align: center;
+}
+
+.customization-header h1 {
+  position: relative;
+  height: 50px;
+}
+
+.model-container {
+  margin-top: 20px;
+}
+
+.shoePreview-container {
+  height: 70%;
+}
+
+.colorpicker-container {
+  height: 30%;
+  box-shadow: inset -1px 0px 20px 3px gray;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .small {
+    flex-direction: column;
+    width: 100%;
+  }
+  .previewBtn {
+    width: 100%;
+    height: 25%;
+  }
+  .colorpicker-container {
+    display: flex;
+    flex-direction: column;
+    height: 45%;
+  }
+  .colorBtns {
+    margin: 10px;
+    padding: 20px;
+  }
+  .shoebox-container {
+    height: 60%;
+  }
+  .landingBtn {
+    width: 50%;
+  }
+  .shoePreview-container {
+    height: 55%;
+  }
 }

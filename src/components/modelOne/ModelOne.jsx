@@ -1,39 +1,43 @@
-import React, { useRef, Suspense, useState, useEffect } from "react";
+import React, { useRef, Suspense, useState, useEffect, useMemo } from "react";
 import { OrbitControls, useGLTF, Stage } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
-function Model(props) {
-  const { selectedColor } = props;
-  const { nodes, materials } = useGLTF("models/ModelOne/scene.gltf");
-  return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.shoe_shoe_0.geometry}
-        material={materials.shoe}
-        material-color={selectedColor ? selectedColor.color : null}
-        rotation={[-Math.PI / 2, 0, 0]}
-        scale={100}
-      />
-      <mesh
-        geometry={nodes.shoelace_shoelace_0.geometry}
-        material={materials.shoelace}
-        rotation={[-Math.PI / 2, 0, 0]}
-        scale={100}
-      />
-    </group>
-  );
-}
-
-useGLTF.preload("models/ModelOne/scene.gltf");
-
 export const ModelOne = ({ selectedColor }) => {
+  const { nodes, materials } = useGLTF("models/ModelOne/scene.gltf");
+  const { color } = selectedColor;
+
+  const [currentColor, setCurrentColor] = useState("#fff");
+
+  useEffect(() => {
+    setCurrentColor(color);
+  }, [color]);
+
+  useEffect(() => {
+    if (materials.shoe) {
+      materials.shoe.color.set(currentColor);
+    }
+  }, [currentColor, materials.shoe]);
+
   return (
     <Canvas camera={{ position: [30, 20, 20] }}>
       <Stage preset="rembrandt" intensity={1} environment="city">
         <Suspense fallback={null}>
           <ambientLight />
           <spotLight intensity={0.9} angle={0.1} penumbra={1} castShadow>
-            <Model selectedColor={selectedColor} />
+            <group dispose={null}>
+              <mesh
+                geometry={nodes.shoe_shoe_0.geometry}
+                material={materials.shoe}
+                rotation={[-Math.PI / 2, 0, 0]}
+                scale={100}
+              ></mesh>
+              <mesh
+                geometry={nodes.shoelace_shoelace_0.geometry}
+                material={materials.shoelace}
+                rotation={[-Math.PI / 2, 0, 0]}
+                scale={100}
+              />
+            </group>
             <OrbitControls
               enableRotate={true}
               enableZoom={true}
@@ -46,3 +50,5 @@ export const ModelOne = ({ selectedColor }) => {
     </Canvas>
   );
 };
+
+useGLTF.preload("models/ModelOne/scene.gltf");

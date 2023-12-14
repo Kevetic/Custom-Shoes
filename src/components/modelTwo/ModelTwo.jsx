@@ -1,4 +1,4 @@
-import React, { useRef, Suspense, useState } from "react";
+import React, { useRef, Suspense, useEffect, useState } from "react";
 import {
   OrbitControls,
   useGLTF,
@@ -12,8 +12,28 @@ function Model(props) {
   const { nodes, materials, animations } = useGLTF(
     "models/ModelTwo/scene.gltf"
   );
-  const { selectedColor } = props;
+  const { selectedColor, currentColor } = props;
   const { actions } = useAnimations(animations, group);
+
+  console.log(selectedColor);
+
+  useEffect(() => {
+    if (materials.Left_tex) {
+      materials.Left_tex.color.set(selectedColor.color);
+    }
+    if (materials.Right_tex) {
+      materials.Right_tex.color.set(selectedColor.color);
+    }
+    if (materials.Laces_tex) {
+      materials.Laces_tex.color.set(selectedColor.laceOne);
+    }
+  }, [
+    selectedColor,
+    materials.Left_tex,
+    materials.Right_tex,
+    materials.Laces_tex,
+  ]);
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
@@ -25,7 +45,6 @@ function Model(props) {
                   name="Object_4"
                   geometry={nodes.Object_4.geometry}
                   material={materials.Left_tex}
-                  material-color={selectedColor ? selectedColor.color : null}
                 />
               </group>
               <group name="Right_Shoe_1">
@@ -33,7 +52,6 @@ function Model(props) {
                   name="Object_6"
                   geometry={nodes.Object_6.geometry}
                   material={materials.Right_tex}
-                  material-color={selectedColor ? selectedColor.color : null}
                 />
               </group>
               <group name="laces_2">
@@ -41,9 +59,6 @@ function Model(props) {
                   name="Object_8"
                   geometry={nodes.Object_8.geometry}
                   material={materials.Laces_tex}
-                  material-color={
-                    selectedColor.laceOne ? selectedColor.laceOne : "#fff"
-                  }
                 />
               </group>
             </group>
@@ -57,13 +72,23 @@ function Model(props) {
 useGLTF.preload("models/ModelTwo/scene.gltf");
 
 export const ModelTwo = ({ selectedColor }) => {
+  const [currentColor, setCurrentColor] = useState({
+    color: "#fff",
+    laceOne: "#fff",
+  });
+  const { color } = selectedColor;
+
+  useEffect(() => {
+    setCurrentColor(selectedColor);
+  }, [color]);
+
   return (
     <Canvas camera={{ position: [2, 2, 2], fov: 10 }}>
       <Stage preset="rembrandt" intensity={1} environment="city">
         <Suspense fallback={null}>
           <ambientLight />
           <spotLight intensity={0.9} angle={0.1} penumbra={1} castShadow>
-            <Model selectedColor={selectedColor} />
+            <Model selectedColor={selectedColor} currentColor={currentColor} />
             <OrbitControls
               enableRotate={true}
               enableZoom={true}

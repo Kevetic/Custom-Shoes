@@ -11,6 +11,7 @@ import ColorPicker from "./components/colorPicker/ColorPicker";
 import { motion, AnimatePresence } from "framer-motion";
 import CloseIcon from "@mui/icons-material/Close";
 import { red } from "@mui/material/colors";
+import CusomizationView from "./views/CusomizationView";
 
 function App() {
   const [landingPage, setLandingPage] = useState(true);
@@ -25,20 +26,33 @@ function App() {
 
   let models = [
     {
-      comp: <ModelOne selectedColor={selectedColor} />,
+      comp: (
+        <ModelOne
+          key={new Date().getTime()}
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+          currentShoe={currentShoe}
+        />
+      ),
       id: 1,
       colors: [
         { color: "rgb(206, 17, 65)", option: "Chicago" },
         { color: "#7BAFD4", option: "UNC" },
-        { color: "#01796f", option: "Union" },
+        { color: "#fff", option: "Shadow 2.0" },
       ],
     },
     {
-      comp: <ModelTwo selectedColor={selectedColor} />,
+      comp: (
+        <ModelTwo
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+          currentShoe={currentShoe}
+        />
+      ),
       id: 2,
       colors: [
-        { color: "#fff", option: "Traditional" },
-        { color: "#000", option: "Triple Black" },
+        { color: "#fff", laceOne: "#fff", option: "Traditional" },
+        { color: "#000", laceOne: "#000", option: "Triple Black" },
         {
           color: "#FF69B4",
           laceOne: "#850101",
@@ -47,12 +61,24 @@ function App() {
       ],
     },
     {
-      comp: <ModelThree selectedColor={selectedColor} />,
+      comp: (
+        <ModelThree
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+          currentShoe={currentShoe}
+        />
+      ),
       colors: [{ option: "no current model" }],
       id: 3,
     },
     {
-      comp: <ModelFour selectedColor={selectedColor} />,
+      comp: (
+        <ModelFour
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+          currentShoe={currentShoe}
+        />
+      ),
       id: 4,
       colors: [{ option: "no current model" }],
     },
@@ -68,6 +94,8 @@ function App() {
 
   const handleClose = () => {
     setClose(!close);
+    setCurrentShoe();
+    setSelectedColor({ color: "#fff", laceOne: "#fff" });
   };
 
   return landingPage ? (
@@ -75,16 +103,17 @@ function App() {
       <Landing setLandingPage={setLandingPage} />
     </div>
   ) : (
-    <div className="customizer" style={{ display: "flex" }}>
+    <div className="customizer" style={{ display: "flex", overflow: "hidden" }}>
       <div className="shoe-container">
-        <div className="small">
+        <div className="small" style={{ height: currentShoe ? "0px" : "100%" }}>
           {models.map((model, idx) => (
             <AnimatePresence>
               <motion.div
                 style={{ opacity: !currentShoe ? 1 : 0 }}
-                whileHover={{ scale: 2, y: 50 }}
+                whileHover={{ scale: 0.9, y: 50 }}
                 animate={{
-                  boxShadow: "10px 10px 0 rgba(0, 0, 0, 0.4)",
+                  boxShadow: "5px 10px 0 rgba(0, 0, 0, 0.4)",
+                  border: "1px solid gray",
                 }}
                 key={model.id}
                 onClick={() => handleClick(model.id)}
@@ -95,74 +124,15 @@ function App() {
             </AnimatePresence>
           ))}
         </div>
-
         {currentShoe ? (
-          <AnimatePresence>
-            <motion.div
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                top: "0",
-              }}
-              transition={{
-                duration: 1,
-                ease: "backInOut",
-              }}
-              className="previewBtn"
-            >
-              <motion.button
-                whileHover={{ scale: 1.5 }}
-                style={{
-                  margin: "40px",
-                  height: "40px",
-                  width: "40px",
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  borderRadius: "15px",
-                  zIndex: 9999,
-                  cursor: "pointer",
-                  background: "transparent",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                onClick={() => handleClose()}
-              >
-                <CloseIcon />
-              </motion.button>
-              {currentShoe.comp}
-            </motion.div>
-          </AnimatePresence>
-        ) : (
-          <motion.h1
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              duration: 1,
-              ease: "backInOut",
-            }}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex-start",
-            }}
-          >
-            Select a Shoe
-          </motion.h1>
-        )}
-      </div>
-      {currentShoe ? (
-        <div className="picker-container">
-          <ColorPicker
-            style={{ display: "flex" }}
+          <CusomizationView
+            handleClose={handleClose}
             currentShoe={currentShoe}
-            setCurrentShoe={setCurrentShoe}
             setSelectedColor={setSelectedColor}
+            selectedColor={selectedColor}
           />
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   );
 }

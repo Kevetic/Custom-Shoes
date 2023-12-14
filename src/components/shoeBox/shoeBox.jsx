@@ -66,7 +66,7 @@ useGLTF.preload("models/ShoeBox/scene.gltf");
 export const ShoeBox = (animate, setLandingPage) => {
   return (
     <Canvas camera={{ position: [9, 3, 10], zoom: 20 }}>
-      <Stage preset="rembrandt" intensity={1} environment="city">
+      <Stage preset="rembrandt" intensity={0} environment="city">
         <Suspense fallback={null}>
           <ambientLight />
           <spotLight intensity={0.9} angle={0.1} penumbra={1} castShadow>
